@@ -1,12 +1,16 @@
-
-
 import React, { useEffect, useState } from 'react';
 import NewsItem from './NewsItem';
 import Spinner from './Spinner';
 import PropTypes from 'prop-types';
 import InfiniteScroll from "react-infinite-scroll-component";
 
-const News = (props) => {
+const News = ({
+    country = 'us',          // Set default values directly in the parameters
+    pageSize = 8,
+    category = 'general',
+    apiKey,
+    setProgress
+}) => {
     const [articles, setArticles] = useState([]);
     const [loading, setLoading] = useState(true);
     const [page, setPage] = useState(1);
@@ -19,36 +23,36 @@ const News = (props) => {
 
     // Fetch news data
     const updateNews = async () => {
-        props.setProgress(10); // Update progress bar
-        const url = `https://newsapi.org/v2/top-headlines?country=${props.country}&category=${props.category}&apiKey=${props.apiKey}&page=${page}&pageSize=${props.pageSize}`;
+        setProgress(10); // Update progress bar
+        const url = `https://newsapi.org/v2/top-headlines?country=${country}&category=${category}&apiKey=${apiKey}&page=${page}&pageSize=${pageSize}`;
         setLoading(true);
         try {
             let data = await fetch(url);
-            props.setProgress(30); // Update progress
+            setProgress(30); // Update progress
             let parsedData = await data.json();
-            props.setProgress(70); // Update progress
+            setProgress(70); // Update progress
             setArticles(parsedData.articles);
             setTotalResults(parsedData.totalResults);
             setLoading(false);
-            props.setProgress(100); // Finalize progress
+            setProgress(100); // Finalize progress
         } catch (error) {
             console.error('Error fetching news:', error);
-            props.setProgress(100); // Finalize progress on error
+            setProgress(100); // Finalize progress on error
             setLoading(false);
         }
     };
 
     // Update the document title and fetch news when component mounts or category/page changes
     useEffect(() => {
-        document.title = `${capitalizeFirstLetter(props.category)} - Live-Info-Hub`;
+        document.title = `${capitalizeFirstLetter(category)} - Live-Info-Hub`;
         updateNews();
         // eslint-disable-next-line
-    }, [props.category]);
+    }, [category]);
 
     // Fetch more news for infinite scroll
     const fetchMoreData = async () => {
         const nextPage = page + 1;
-        const url = `https://newsapi.org/v2/top-headlines?country=${props.country}&category=${props.category}&apiKey=${props.apiKey}&page=${nextPage}&pageSize=${props.pageSize}`;
+        const url = `https://newsapi.org/v2/top-headlines?country=${country}&category=${category}&apiKey=${apiKey}&page=${nextPage}&pageSize=${pageSize}`;
         setPage(nextPage);
         try {
             let data = await fetch(url);
@@ -63,7 +67,7 @@ const News = (props) => {
     return (
         <>
             <h1 className="text-center" style={{ margin: '35px 0px', marginTop: '90px' }}>
-                Live-Info-Hub - Top {capitalizeFirstLetter(props.category)} Headlines
+                Live-Info-Hub - Top {capitalizeFirstLetter(category)} Headlines
             </h1>
             {loading && <Spinner />} {/* Display spinner while loading */}
             
@@ -94,13 +98,6 @@ const News = (props) => {
             </InfiniteScroll>
         </>
     );
-};
-
-// Default props in case none are provided
-News.defaultProps = {
-    country: 'us',
-    pageSize: 8,
-    category: 'general',
 };
 
 // PropTypes for type-checking
