@@ -8,9 +8,9 @@ const News = ({
     country = 'us',
     pageSize = 8,
     category = 'general',
-    apiKey,
     setProgress
 }) => {
+    const apiKey = process.env.REACT_APP_NEWS_API_KEY; // Accessing the API key from .env
     const [articles, setArticles] = useState([]);
     const [loading, setLoading] = useState(true);
     const [page, setPage] = useState(1);
@@ -29,7 +29,6 @@ const News = ({
             setProgress(30);
             let parsedData = await data.json();
 
-            // Log the API response
             console.log('API Response:', parsedData);
 
             if (parsedData && parsedData.articles) {
@@ -53,7 +52,7 @@ const News = ({
     useEffect(() => {
         document.title = `${capitalizeFirstLetter(category)} - Live-Info-Hub`;
         updateNews();
-    }, [category, updateNews]); // Add updateNews to the dependency array
+    }, [category, updateNews]);
 
     const fetchMoreData = async () => {
         const nextPage = page + 1;
@@ -62,7 +61,7 @@ const News = ({
         try {
             let data = await fetch(url);
             let parsedData = await data.json();
-            setArticles(articles.concat(parsedData.articles)); // Append new articles to the existing list
+            setArticles(articles.concat(parsedData.articles));
             setTotalResults(parsedData.totalResults);
         } catch (error) {
             console.error('Error fetching more news:', error);
@@ -108,7 +107,6 @@ News.propTypes = {
     country: PropTypes.string,
     pageSize: PropTypes.number,
     category: PropTypes.string,
-    apiKey: PropTypes.string.isRequired,
     setProgress: PropTypes.func.isRequired,
 };
 
