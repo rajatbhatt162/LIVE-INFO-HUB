@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/LIVE-INFO-HUB/static/css/main.dc4d6ff2.css",
-    "main.js": "/LIVE-INFO-HUB/static/js/main.0dbb9583.js",
+    "main.js": "/LIVE-INFO-HUB/static/js/main.5316afa8.js",
     "static/js/453.20ccd293.chunk.js": "/LIVE-INFO-HUB/static/js/453.20ccd293.chunk.js",
     "index.html": "/LIVE-INFO-HUB/index.html",
     "main.dc4d6ff2.css.map": "/LIVE-INFO-HUB/static/css/main.dc4d6ff2.css.map",
-    "main.0dbb9583.js.map": "/LIVE-INFO-HUB/static/js/main.0dbb9583.js.map",
+    "main.5316afa8.js.map": "/LIVE-INFO-HUB/static/js/main.5316afa8.js.map",
     "453.20ccd293.chunk.js.map": "/LIVE-INFO-HUB/static/js/453.20ccd293.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.dc4d6ff2.css",
-    "static/js/main.0dbb9583.js"
+    "static/js/main.5316afa8.js"
   ]
 }

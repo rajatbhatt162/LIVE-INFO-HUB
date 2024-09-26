@@ -41,5 +41,8 @@
       "last 1 safari version"
     ]
   },
-  "homepage": "https://rajatbhatt162.github.io/LIVE-INFO-HUB"
+  "homepage": "https://rajatbhatt162.github.io/LIVE-INFO-HUB",
+  "devDependencies": {
+    "@babel/plugin-proposal-private-property-in-object": "^7.21.11"
+  }
 }
