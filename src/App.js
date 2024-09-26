@@ -7,12 +7,12 @@ import LoadingBar from 'react-top-loading-bar';
 
 const App = () => {
     const pageSize = 5;
-    const apiKey = "15edf98ab5e642cf8db1b206da760db4"; // Set your API key here
+    const apiKey = "15edf98ab5e642cf8db1b206da760db4"; // Ensure the API key is correct and working
     const [progress, setProgress] = useState(0); // For loading progress bar
 
     return (
         <div>
-            <Router>
+            <Router basename="/LIVE-INFO-HUB"> {/* Added basename for GitHub Pages */}
                 <NavBar />
                 <LoadingBar
                     height={3}
